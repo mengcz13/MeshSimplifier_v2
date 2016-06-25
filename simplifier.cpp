@@ -69,14 +69,16 @@ void Simplifier::simplify(double rate) {
     size_t former_face_num = flist.size();
     size_t facenum = former_face_num;
     while ((double)facenum / (double)former_face_num > rate) {
-        cout << (double)facenum / (double)former_face_num << '\r';
+        // cout << (double)facenum / (double)former_face_num << '\r';
         Pair pshrink = pairheap.top();
         pairheap.pop();
         if (!vlist.at(pshrink.v.first).left || !vlist.at(pshrink.v.second).left)
             continue;
         bool border1 = isatborder(pshrink.v.first);
         bool border2 = isatborder(pshrink.v.second);
-        if (border1 ^ border2)
+//        if (border1 ^ border2)
+//            continue;
+        if (border1 || border2)
             continue;
         vlist.at(pshrink.v.first).left = false;
         vlist.at(pshrink.v.second).left = false;
